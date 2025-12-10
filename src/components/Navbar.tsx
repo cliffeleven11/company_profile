@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,18 +18,18 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
-        { name: "Beranda", href: "#home" },
-        { name: "Tentang", href: "#about" },
-        { name: "Layanan", href: "#services" },
-        { name: "Tim", href: "#team" },
-        { name: "Kontak", href: "#contact" },
+        { name: t("navHome"), href: "#home" },
+        { name: t("navAbout"), href: "#about" },
+        { name: t("navServices"), href: "#services" },
+        { name: t("navTeam"), href: "#team" },
+        { name: t("navContact"), href: "#contact" },
     ];
 
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-lg"
-                    : "bg-transparent"
+                    ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
+                    : "bg-white/80 backdrop-blur-sm"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,29 +48,49 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`text-sm font-medium transition-colors hover:text-indigo-600 ${isScrolled
-                                        ? "text-gray-700 dark:text-gray-200"
-                                        : "text-gray-800 dark:text-white"
-                                    }`}
+                                className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
                             >
                                 {link.name}
                             </Link>
                         ))}
+
+                        {/* Language Switcher */}
+                        <div className="flex items-center space-x-1 bg-gray-100 rounded-full p-1">
+                            <button
+                                onClick={() => setLanguage("id")}
+                                className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${language === "id"
+                                        ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white"
+                                        : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                ID
+                            </button>
+                            <button
+                                onClick={() => setLanguage("en")}
+                                className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${language === "en"
+                                        ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white"
+                                        : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                EN
+                            </button>
+                        </div>
+
                         <Link
                             href="#contact"
                             className="gradient-btn px-6 py-2.5 rounded-full text-white text-sm font-medium"
                         >
-                            Hubungi Kami
+                            {t("navCta")}
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         <svg
-                            className="w-6 h-6 text-gray-700 dark:text-white"
+                            className="w-6 h-6 text-gray-700"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -95,26 +117,50 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             <div
-                className={`md:hidden transition-all duration-300 overflow-hidden ${isMobileMenuOpen ? "max-h-96" : "max-h-0"
+                className={`md:hidden transition-all duration-300 overflow-hidden ${isMobileMenuOpen ? "max-h-screen" : "max-h-0"
                     }`}
             >
-                <div className="bg-white dark:bg-gray-900 px-4 py-4 space-y-3 shadow-lg">
+                <div className="bg-white px-4 py-4 space-y-3 shadow-lg border-t border-gray-100">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:text-indigo-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                            className="block px-4 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             {link.name}
                         </Link>
                     ))}
+
+                    {/* Mobile Language Switcher */}
+                    <div className="flex items-center space-x-2 px-4 py-2">
+                        <span className="text-sm text-gray-500">Language:</span>
+                        <button
+                            onClick={() => setLanguage("id")}
+                            className={`px-3 py-1 text-xs font-medium rounded-full ${language === "id"
+                                    ? "bg-indigo-500 text-white"
+                                    : "bg-gray-100 text-gray-600"
+                                }`}
+                        >
+                            ID
+                        </button>
+                        <button
+                            onClick={() => setLanguage("en")}
+                            className={`px-3 py-1 text-xs font-medium rounded-full ${language === "en"
+                                    ? "bg-indigo-500 text-white"
+                                    : "bg-gray-100 text-gray-600"
+                                }`}
+                        >
+                            EN
+                        </button>
+                    </div>
+
                     <Link
                         href="#contact"
                         className="block gradient-btn px-6 py-3 rounded-full text-white text-center font-medium"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
-                        Hubungi Kami
+                        {t("navCta")}
                     </Link>
                 </div>
             </div>

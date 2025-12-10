@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -34,7 +36,7 @@ export default function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
             ),
-            title: "Alamat",
+            title: t("contactAddress"),
             content: "Jl. Teknologi Digital No. 11, Jakarta Selatan, Indonesia 12345",
         },
         {
@@ -43,7 +45,7 @@ export default function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             ),
-            title: "Email",
+            title: t("contactEmail"),
             content: "hello@cliffeleven.com",
         },
         {
@@ -52,88 +54,88 @@ export default function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
             ),
-            title: "Telepon",
+            title: t("contactPhone"),
             content: "+62 21 1234 5678",
         },
     ];
 
     return (
-        <section id="contact" className="py-24 bg-gray-50 dark:bg-gray-800">
+        <section id="contact" className="py-24 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/50 mb-6">
-                        <span className="text-sm font-medium text-indigo-700 dark:text-indigo-300">
-                            Hubungi Kami
+                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-white border border-indigo-100 shadow-sm mb-6">
+                        <span className="text-sm font-medium text-indigo-600">
+                            {t("contactBadge")}
                         </span>
                     </div>
-                    <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                        Mari Bekerja
-                        <span className="gradient-text block">Sama Bersama</span>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+                        {t("contactTitle1")}
+                        <span className="gradient-text block">{t("contactTitle2")}</span>
                     </h2>
-                    <p className="text-lg text-gray-600 dark:text-gray-300">
-                        Punya proyek atau ide? Kami siap membantu mewujudkan visi digital Anda
+                    <p className="text-lg text-gray-600">
+                        {t("contactDesc")}
                     </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-16">
                     {/* Contact Form */}
-                    <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid sm:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                        Nama Lengkap
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        {t("contactName")}
                                     </label>
                                     <input
                                         type="text"
                                         required
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                         placeholder="John Doe"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                        Email
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        {t("contactEmail")}
                                     </label>
                                     <input
                                         type="email"
                                         required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                                         placeholder="john@example.com"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Subjek
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    {t("contactSubject")}
                                 </label>
                                 <input
                                     type="text"
                                     required
                                     value={formData.subject}
                                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                                    placeholder="Diskusi Proyek"
+                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                                    placeholder="Project Discussion"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Pesan
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    {t("contactMessage")}
                                 </label>
                                 <textarea
                                     required
                                     rows={5}
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 resize-none"
-                                    placeholder="Ceritakan tentang proyek Anda..."
+                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 resize-none"
+                                    placeholder="Tell us about your project..."
                                 />
                             </div>
 
@@ -148,18 +150,18 @@ export default function Contact() {
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                                         </svg>
-                                        Mengirim...
+                                        {t("contactSending")}
                                     </>
                                 ) : isSubmitted ? (
                                     <>
                                         <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
-                                        Pesan Terkirim!
+                                        {t("contactSent")}
                                     </>
                                 ) : (
                                     <>
-                                        Kirim Pesan
+                                        {t("contactSend")}
                                         <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                         </svg>
@@ -176,16 +178,16 @@ export default function Contact() {
                             {contactInfo.map((info, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-start space-x-4 bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 card-hover"
+                                    className="flex items-start space-x-4 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-hover"
                                 >
-                                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white">
+                                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
                                         {info.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
                                             {info.title}
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-400">
+                                        <p className="text-gray-600">
                                             {info.content}
                                         </p>
                                     </div>
@@ -194,9 +196,9 @@ export default function Contact() {
                         </div>
 
                         {/* Social Links */}
-                        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                                Ikuti Kami
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                                {t("contactFollow")}
                             </h3>
                             <div className="flex space-x-4">
                                 {[
@@ -208,7 +210,7 @@ export default function Contact() {
                                     <a
                                         key={index}
                                         href="#"
-                                        className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gradient-to-br hover:from-indigo-500 hover:to-purple-600 hover:text-white transition-all duration-300"
+                                        className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600 hover:bg-gradient-to-br hover:from-indigo-500 hover:to-purple-600 hover:text-white transition-all duration-300"
                                         title={social.name}
                                     >
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -220,13 +222,13 @@ export default function Contact() {
                         </div>
 
                         {/* Map Placeholder */}
-                        <div className="bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl h-48 flex items-center justify-center border border-gray-200 dark:border-gray-600">
+                        <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl h-48 flex items-center justify-center border border-indigo-100">
                             <div className="text-center">
                                 <svg className="w-12 h-12 mx-auto text-indigo-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                <p className="text-gray-600 dark:text-gray-400">Lokasi Kami di Google Maps</p>
+                                <p className="text-gray-600">{t("contactMap")}</p>
                             </div>
                         </div>
                     </div>

@@ -1,36 +1,40 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+    const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
 
     const footerLinks = {
         company: [
-            { name: "Tentang Kami", href: "#about" },
-            { name: "Tim", href: "#team" },
-            { name: "Karir", href: "#" },
-            { name: "Blog", href: "#" },
+            { name: t("footerAbout"), href: "#about" },
+            { name: t("footerTeam"), href: "#team" },
+            { name: t("footerCareer"), href: "#" },
+            { name: t("footerBlog"), href: "#" },
         ],
         services: [
-            { name: "Web Development", href: "#services" },
-            { name: "Mobile App", href: "#services" },
-            { name: "UI/UX Design", href: "#services" },
-            { name: "Cloud Solutions", href: "#services" },
+            { name: t("serviceWeb"), href: "#services" },
+            { name: t("serviceMobile"), href: "#services" },
+            { name: t("serviceUI"), href: "#services" },
+            { name: t("serviceCloud"), href: "#services" },
         ],
         support: [
-            { name: "FAQ", href: "#" },
-            { name: "Dokumentasi", href: "#" },
-            { name: "Kontak", href: "#contact" },
-            { name: "Status", href: "#" },
+            { name: t("footerFaq"), href: "#" },
+            { name: t("footerDocs"), href: "#" },
+            { name: t("navContact"), href: "#contact" },
+            { name: t("footerStatus"), href: "#" },
         ],
         legal: [
-            { name: "Privasi", href: "#" },
-            { name: "Syarat & Ketentuan", href: "#" },
-            { name: "Cookies", href: "#" },
+            { name: t("footerPrivacy"), href: "#" },
+            { name: t("footerTerms"), href: "#" },
+            { name: t("footerCookies"), href: "#" },
         ],
     };
 
     return (
-        <footer className="bg-gray-900 text-white">
+        <footer className="bg-white border-t border-gray-100">
             {/* Main Footer */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12">
@@ -40,20 +44,19 @@ export default function Footer() {
                             <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
                                 <span className="text-white font-bold text-xl">C</span>
                             </div>
-                            <span className="text-xl font-bold">Cliff Eleven</span>
+                            <span className="text-xl font-bold gradient-text">Cliff Eleven</span>
                         </Link>
-                        <p className="text-gray-400 leading-relaxed mb-6">
-                            Partner teknologi terpercaya untuk transformasi digital bisnis Anda.
-                            Kami menghadirkan solusi inovatif yang modern dan berdampak.
+                        <p className="text-gray-600 leading-relaxed mb-6">
+                            {t("footerDesc")}
                         </p>
                         {/* Newsletter */}
                         <div className="flex gap-2">
                             <input
                                 type="email"
-                                placeholder="Email Anda"
-                                className="flex-1 px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                placeholder="Email"
+                                className="flex-1 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                             />
-                            <button className="gradient-btn px-6 py-3 rounded-xl font-medium">
+                            <button className="gradient-btn px-6 py-3 rounded-xl font-medium text-white">
                                 Subscribe
                             </button>
                         </div>
@@ -61,13 +64,13 @@ export default function Footer() {
 
                     {/* Company Links */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-6">Perusahaan</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-6">{t("footerCompany")}</h3>
                         <ul className="space-y-4">
                             {footerLinks.company.map((link, index) => (
                                 <li key={index}>
                                     <Link
                                         href={link.href}
-                                        className="text-gray-400 hover:text-white transition-colors"
+                                        className="text-gray-600 hover:text-indigo-600 transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -78,13 +81,13 @@ export default function Footer() {
 
                     {/* Services Links */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-6">Layanan</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-6">{t("footerServices")}</h3>
                         <ul className="space-y-4">
                             {footerLinks.services.map((link, index) => (
                                 <li key={index}>
                                     <Link
                                         href={link.href}
-                                        className="text-gray-400 hover:text-white transition-colors"
+                                        className="text-gray-600 hover:text-indigo-600 transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -95,13 +98,13 @@ export default function Footer() {
 
                     {/* Support Links */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-6">Dukungan</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-6">{t("footerSupport")}</h3>
                         <ul className="space-y-4">
                             {footerLinks.support.map((link, index) => (
                                 <li key={index}>
                                     <Link
                                         href={link.href}
-                                        className="text-gray-400 hover:text-white transition-colors"
+                                        className="text-gray-600 hover:text-indigo-600 transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -112,13 +115,13 @@ export default function Footer() {
 
                     {/* Legal Links */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-6">Legal</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-6">{t("footerLegal")}</h3>
                         <ul className="space-y-4">
                             {footerLinks.legal.map((link, index) => (
                                 <li key={index}>
                                     <Link
                                         href={link.href}
-                                        className="text-gray-400 hover:text-white transition-colors"
+                                        className="text-gray-600 hover:text-indigo-600 transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -130,10 +133,10 @@ export default function Footer() {
             </div>
 
             {/* Bottom Footer */}
-            <div className="border-t border-gray-800">
+            <div className="border-t border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-gray-500 text-sm">
                             © {currentYear} Cliff Eleven. All rights reserved.
                         </p>
                         {/* Social Links */}
@@ -147,7 +150,7 @@ export default function Footer() {
                                 <a
                                     key={index}
                                     href="#"
-                                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:bg-indigo-500 hover:text-white transition-all duration-300"
+                                    className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 hover:bg-indigo-500 hover:text-white transition-all duration-300"
                                     title={social.name}
                                 >
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
